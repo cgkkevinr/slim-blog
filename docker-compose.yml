@@ -5,8 +5,8 @@ services:
   php:
     build: .docker/php
     volumes:
-      - ./:/usr/src/php-project
-    working_dir: /usr/src/php-project
+      - ./:/usr/src/blog
+    working_dir: /usr/src/blog
     expose:
       - "9000"
     ports:
