@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  php:
+    build: .docker/php
+    volumes:
+      - ./:/usr/src/php-project
+    working_dir: /usr/src/php-project
+    expose:
+      - "9000"
+    ports:
+      - "8000:8000"
