@@ -2,12 +2,16 @@
 declare(strict_types=1);
 
 return [
-    'displayErrorDetails' => true,
-    'addContentLengthHeader' => false,
-    'db' => [
-        'host' => 'localhost',
-        'user' => 'user',
-        'pass' => 'password',
-        'dbname' => 'example'
+    'settings' => [
+        // Slim
+        'displayErrorDetails' => true,
+        'addContentLengthHeader' => false,
+
+        // Monolog
+        'logger' => [
+            'name' => 'blog',
+            'path' => __DIR__ . '/../var/log/app.log',
+            'level' => \Monolog\Logger::DEBUG
+        ]
     ]
 ];
