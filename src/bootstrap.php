@@ -3,31 +3,22 @@ declare(strict_types=1);
 
 namespace App;
 
-use Slim\App;
-use Slim\Http\Request;
-use Slim\Http\Response;
-
 require __DIR__ . '/../vendor/autoload.php';
 
 error_reporting(E_ALL);
 
-$settings = include "settings.php";
+// Instantiate the App
+$settings = require "settings.php";
+$app = new \Slim\App($settings);
 
-$app = new App(['settings' => $settings]);
+// Wire up services
+require __DIR__ . "services.php";
 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name!");
+// Register middleware
+require __DIR__ . "middleware.php";
 
-    return $response;
-});
+// Register routes
+require __DIR__ . "routes.php";
 
-$app->get('/{page}', function (Request $request, Response $response, array $args) {
-    $name = $args['page'];
-    $response = $response->withStatus(404);
-    $response->getBody()->write("Page $name - Not Found");
-
-    return $response;
-});
-
+// Start the App
 $app->run();
