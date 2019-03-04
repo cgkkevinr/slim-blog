@@ -4,12 +4,9 @@ declare(strict_types=1);
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-$app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-    $name = $args['name'];
-    $response->getBody()->write("Hello, $name!");
+$app->get('/', \App\Controller\Home::class);
 
-    return $response;
-});
+$app->get('/hello[/{name}]', \App\Controller\Hello::class);
 
 $app->get('/{page}', function (Request $request, Response $response, array $args) use ($app) {
     $logger = $app->getContainer()->get('logger');
