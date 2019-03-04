@@ -15,3 +15,23 @@ $container['logger'] = function (\Psr\Container\ContainerInterface $container) {
 
     return $logger;
 };
+
+// Renderer
+$container['twig'] = function (\Psr\Container\ContainerInterface $container) {
+    $settings = $container->get('settings')['twig'];
+    $loaderSettings = $settings['loader'];
+    $environmentSettings = $settings['environment'];
+
+    $loader = new \Twig\Loader\FilesystemLoader($loaderSettings['paths']);
+    $environment = new \Twig\Environment($loader, $environmentSettings);
+
+    return new \App\Template\TwigRenderer($environment);
+};
+
+$container[\App\Template\Renderer::class] = $container['twig'];
+
+// Controllers
+$container[\App\Controller\Hello::class] = function (\Psr\Container\ContainerInterface $container) {
+    $renderer = $container->get(\App\Template\Renderer::class);
+    return new \App\Controller\Hello($renderer);
+};
