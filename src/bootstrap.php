@@ -12,13 +12,13 @@ $settings = require "settings.php";
 $app = new \Slim\App($settings);
 
 // Wire up services
-require __DIR__ . "services.php";
+require "services.php";
 
 // Register middleware
-require __DIR__ . "middleware.php";
+require "middleware.php";
 
 // Register routes
-require __DIR__ . "routes.php";
+require "routes.php";
 
 // Start the App
 $app->run();
