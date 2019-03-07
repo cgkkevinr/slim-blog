@@ -1,13 +1,48 @@
-version: '3'
+version: '3.7'
 
 services:
 
   php:
-    build: .docker/php
+    image: php:7.3-fpm
     volumes:
-      - ./:/usr/src/blog
-    working_dir: /usr/src/blog
-    expose:
-      - "9000"
+      - ./public:/usr/src/blog/public
+      - ./src:/usr/src/blog/src
+      - ./templates:/usr/src/blog/templates
+      - ./var:/usr/src/blog/var
+      - ./vendor:/usr/src/blog/vendor
+    networks:
+      - frontend
+      - backend
+
+  web:
+    image: nginx
+    volumes:
+      - ./public:/usr/src/blog/public:ro
+      - ./.docker/web/blog.conf:/etc/nginx/conf.d/blog.conf
+    networks:
+      - frontend
     ports:
-      - "8000:8000"
+      - 8081:80
+    depends_on:
+      - php
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    networks:
+      - backend
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+networks:
+  frontend:
+    name: frontend
+  backend:
+    name: backend
+    internal: true
