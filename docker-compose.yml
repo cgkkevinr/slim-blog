@@ -3,8 +3,9 @@ version: '3.7'
 services:
 
   php:
-    image: php:7.3-fpm
+    build: .docker/php
     volumes:
+      - ./config/:/usr/src/blog/config
       - ./public:/usr/src/blog/public
       - ./src:/usr/src/blog/src
       - ./templates:/usr/src/blog/templates
@@ -39,6 +40,9 @@ services:
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - frontend
+      - backend
 
 networks:
   frontend:
