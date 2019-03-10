@@ -25,5 +25,24 @@ return [
                 'cache' => __DIR__ . '/../var/cache/twig/'
             ]
         ],
+
+        'doctrine' => [
+            'meta' => [
+                'entity_paths' => [
+                    __DIR__ . '/Entity'
+                ],
+                'dev_mode' => false,
+                'proxy_dir' => null,
+                'cache' => null,
+                'simple_annotations' => false
+            ],
+            'connections' => [
+                'host' => 'db',
+                'driver' => 'pdo_pgsql',
+                'user'   => 'postgres',
+                'password' => 'example',
+                'dbname' => 'blog'
+            ]
+        ]
     ]
 ];

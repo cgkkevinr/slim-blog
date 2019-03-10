@@ -5,19 +5,17 @@ $container = $app->getContainer();
 
 // Doctrine
 $container['doctrine'] = function (\Psr\Container\ContainerInterface $container) {
-    $paths = [__DIR__ . "/Entity"];
-    $isDevMode = false;
+    $settings = $container->get('settings')['doctrine'];
 
-    $settings = [
-        'host' => 'db',
-        'driver' => 'pdo_pgsql',
-        'user'   => 'postgres',
-        'password' => 'example',
-        'dbname' => 'blog'
-    ];
+    $meta = $settings['meta'];
+    $isDevMode = $meta['dev_mode'];
+    $paths = $meta['entity_paths'];
+    $proxyDir = $meta['proxy_dir'];
+    $cache = $meta['cache'];
+    $useSimpleAnnotations = $meta['simple_annotations'];
 
-    $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, null, null, false);
-    return \Doctrine\ORM\EntityManager::create($settings, $config);
+    $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, $proxyDir, $cache, $useSimpleAnnotations);
+    return \Doctrine\ORM\EntityManager::create($settings['connections'], $config);
 };
 
 // Monolog
