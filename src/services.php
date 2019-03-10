@@ -3,6 +3,23 @@ declare(strict_types=1);
 
 $container = $app->getContainer();
 
+// Doctrine
+$container['doctrine'] = function (\Psr\Container\ContainerInterface $container) {
+    $paths = [__DIR__ . "/Entity"];
+    $isDevMode = false;
+
+    $settings = [
+        'host' => 'db',
+        'driver' => 'pdo_pgsql',
+        'user'   => 'postgres',
+        'password' => 'example',
+        'dbname' => 'blog'
+    ];
+
+    $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode, null, null, false);
+    return \Doctrine\ORM\EntityManager::create($settings, $config);
+};
+
 // Monolog
 $container['logger'] = function (\Psr\Container\ContainerInterface $container) {
     $settings = $container->get('settings')['logger'];
