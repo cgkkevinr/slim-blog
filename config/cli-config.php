@@ -5,4 +5,7 @@ require_once __DIR__ . '/../src/bootstrap.php';
 
 $entityManager = $app->getContainer()->get('doctrine');
 
-return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
+return new \Symfony\Component\Console\Helper\HelperSet([
+    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($entityManager),
+    'db' => new \Doctrine\DBAL\Tools\Console\Helper\ConnectionHelper($entityManager->getConnection())
+]);

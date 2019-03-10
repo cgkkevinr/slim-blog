@@ -11,6 +11,7 @@ services:
       - ./templates:/usr/src/blog/templates
       - ./var:/usr/src/blog/var
       - ./vendor:/usr/src/blog/vendor
+      - ./migrations.php:/usr/src/blog/migrations.php
     networks:
       - frontend
       - backend
