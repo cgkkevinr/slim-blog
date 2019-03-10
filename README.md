@@ -7,7 +7,7 @@ Composer can run as a standalone (temporary) container to do any actions you wis
 
 *Development*
 
-`docker run --rm --interactive --ty --volume ${PWD}:/app composer install --ignore-platform-reqs --no-scripts`
+`docker run --rm --interactive --tty --volume ${PWD}:/app composer install --ignore-platform-reqs --no-scripts`
 
 *Production*
 
