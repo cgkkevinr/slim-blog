@@ -50,3 +50,8 @@ $container[\App\Controller\Hello::class] = function (\Psr\Container\ContainerInt
     $renderer = $container->get(\App\Template\Renderer::class);
     return new \App\Controller\Hello($renderer);
 };
+
+$container[\App\Controller\HttpNotFound::class] = function (\Psr\Container\ContainerInterface $container) {
+    $renderer = $container->get(\App\Template\Renderer::class);
+    return new \App\Controller\HttpNotFound($renderer);
+};
