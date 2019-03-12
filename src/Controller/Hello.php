@@ -22,7 +22,7 @@ class Hello
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response, array $args)
     {
         $name = $args['name'] ?? 'stranger';
-        $template = $this->renderer->render('welcome', ['name' => $name]);
+        $template = $this->renderer->render('welcome.html', ['name' => $name]);
         return $response->getBody()->write($template);
     }
 }
