@@ -5,5 +5,5 @@ namespace App\Template;
 
 interface Renderer
 {
-    public function render(string $template, array $data): string;
+    public function render(string $template, array $data = []): string;
 }
