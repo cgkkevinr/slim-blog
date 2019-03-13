@@ -18,7 +18,8 @@
     },
     "require-dev": {
         "doctrine/migrations": "^2.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "fzaninotto/faker": "^1.8"
     },
     "autoload": {
         "psr-4": {
