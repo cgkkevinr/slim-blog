@@ -5,7 +5,6 @@ namespace App\Controller;
 
 use App\Repository\PostRepository;
 use App\Template\Renderer;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
