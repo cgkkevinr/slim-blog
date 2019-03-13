@@ -22,7 +22,7 @@ final class Version20190312200535 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('ALTER TABLE post ADD content TEXT NOT NULL');
+        $this->addSql('ALTER TABLE post ADD content TEXT');
     }
 
     public function down(Schema $schema) : void
