@@ -10,14 +10,22 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    {% block page_title %}{% endblock %}
+                </h1>
+                <p class="subtitle">
+                    {% block page_subtitle %}{% endblock %}
+                </p>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div class="container">
-            <h1 class="title">
-                {% block page_title %}{% endblock %}
-            </h1>
-            <p class="subtitle">
-                {% block page_subtitle %}{% endblock %}
-            </p>
+            {% block content %}
+            {% endblock %}
         </div>
     </section>
 </body>

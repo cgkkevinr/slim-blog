@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Index{% endblock %}
+
+{% block page_title %}Welcome to our blog{% endblock %}
+{% block page_subtitle %}There are {{ count }} posts{% endblock %}
+
+{% block content %}
+    <div class="tile is-ancestor">
+        {% for post in posts %}
+            <article class="tile is-child notification is-primary">
+                <p class="title">{{ post.title }}</p>
+                <p class="content">Example</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endblock %}
