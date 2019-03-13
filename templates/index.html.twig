@@ -7,11 +7,15 @@
 
 {% block content %}
     <div class="tile is-ancestor">
-        {% for post in posts %}
-            <article class="tile is-child notification is-primary">
-                <p class="title">{{ post.title }}</p>
-                <p class="content">Example</p>
-            </article>
+        <div class="tile">
+            {% for post in posts %}
+                <div class="tile is-parent">
+                    <article class="tile is-child box">
+                        <p class="title">{{ post.title }}</p>
+                        <p class="content">{{ post.content }}</p>
+                    </article>
+                </div>
+        </div>
         {% endfor %}
     </div>
 {% endblock %}
