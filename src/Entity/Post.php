@@ -11,13 +11,34 @@ use Doctrine\ORM\Mapping as ORM;
 class Post
 {
     /**
-     * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="post_id_seq")
+     * @ORM\Column(type="integer", options={"default"="nextval('post_id_seq'::regclass)"})
      */
     private $id;
     /**
      * @ORM\Column()
      */
     private $title;
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
 }

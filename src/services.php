@@ -18,6 +18,14 @@ $container['doctrine'] = function (\Psr\Container\ContainerInterface $container)
     return \Doctrine\ORM\EntityManager::create($settings['connections'], $config);
 };
 
+// Repositories
+$container[\App\Repository\DoctrinePostRepository::class] = function (\Psr\Container\ContainerInterface $container) {
+    $entityManager = $container->get('doctrine');
+    return new \App\Repository\DoctrinePostRepository($entityManager);
+};
+
+$container[\App\Repository\PostRepository::class] = $container[\App\Repository\DoctrinePostRepository::class];
+
 // Monolog
 $container['logger'] = function (\Psr\Container\ContainerInterface $container) {
     $settings = $container->get('settings')['logger'];
@@ -39,6 +47,7 @@ $container['twig'] = function (\Psr\Container\ContainerInterface $container) {
 
     $loader = new \Twig\Loader\FilesystemLoader($loaderSettings['paths']);
     $environment = new \Twig\Environment($loader, $environmentSettings);
+    $environment->addExtension(new \Twig\Extension\DebugExtension());
 
     return new \App\Template\TwigRenderer($environment);
 };
@@ -54,4 +63,10 @@ $container[\App\Controller\Hello::class] = function (\Psr\Container\ContainerInt
 $container[\App\Controller\HttpNotFound::class] = function (\Psr\Container\ContainerInterface $container) {
     $renderer = $container->get(\App\Template\Renderer::class);
     return new \App\Controller\HttpNotFound($renderer);
+};
+
+$container[\App\Controller\Home::class] = function (\Psr\Container\ContainerInterface $container) {
+    $renderer = $container->get(\App\Template\Renderer::class);
+    $repository = $container->get(\App\Repository\PostRepository::class);
+    return new \App\Controller\Home($renderer, $repository);
 };
