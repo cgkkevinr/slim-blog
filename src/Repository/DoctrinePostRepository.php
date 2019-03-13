@@ -23,4 +23,9 @@ class DoctrinePostRepository implements PostRepository
     {
         return $this->repository->findAll();
     }
+
+    public function find(int $id): ?Post
+    {
+        return $this->repository->find($id);
+    }
 }

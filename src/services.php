@@ -70,3 +70,9 @@ $container[\App\Controller\Home::class] = function (\Psr\Container\ContainerInte
     $repository = $container->get(\App\Repository\PostRepository::class);
     return new \App\Controller\Home($renderer, $repository);
 };
+
+$container[\App\Controller\ShowPost::class] = function (\Psr\Container\ContainerInterface $container) {
+    $renderer = $container->get(\App\Template\Renderer::class);
+    $repository = $container->get(\App\Repository\PostRepository::class);
+    return new \App\Controller\ShowPost($repository, $renderer);
+};

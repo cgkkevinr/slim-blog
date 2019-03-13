@@ -19,10 +19,12 @@ return [
             'loader' => [
                 'paths' => [
                     __DIR__ . '/../templates/'
-                ]
+                ],
+                'debug' => true
             ],
             'environment' => [
-                'cache' => __DIR__ . '/../var/cache/twig/'
+                // 'cache' => __DIR__ . '/../var/cache/twig/'
+                'cache' => false
             ]
         ],
 
